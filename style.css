@@ -1,0 +1,275 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+/* print screen size */
+  @media print{
+        body{
+          visibility: hidden;
+        }
+
+        #tableContainer{
+          visibility: visible;
+          position: absolute;
+          top: 0;
+          left: 0;
+        }
+        #tableContainer #table_box1 table th,#table_box1 table td,#table_box2 table th,#table_box2 table td{
+          border: 1px solid #888 !important;
+        }
+        #tableContainer button{
+            display: none;
+        }
+        #tableContainer hr{
+            display: none;
+        }
+        #chartContainer{
+         margin: 0 !important;
+        }
+      }
+
+      body{
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+      }
+      #upBtn{
+        background: #fff;
+        color: #000;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 50%;
+        position: fixed;
+        bottom: 25px;
+        right: 40px;
+        z-index: 3;
+        transition: .3s ease-in-out;
+      }
+      #upBtn:hover{
+        background: #f5f5f7;
+        transform: translateY(-4px);
+      }
+      #upBtn i{
+        font-size: 1.3rem;
+        transition: .2s ease-in-out;
+      }
+      #upBtn:hover i{
+        /* transform: translateY(2px); */
+        font-size: 1.2rem;
+
+      }
+   
+      
+      #incomeType,#income{
+        width: 45%;
+      }
+      .active i{
+        animation: slide 300ms linear forwards;
+      }
+      /* index title */
+      .title{
+        font-size: 3.5rem;
+        font-weight: 500;
+      }
+      .title::first-letter{
+        font-weight: 600;
+        color: rgba(1, 200, 170, 0.796);
+        font-size: 4rem;
+      }
+      .title span{
+        color: rgba(244, 93, 126, 0.914);
+        font-size: 4rem;
+      }
+      #image-qr{
+        width:40% ;
+      }
+      /* qr show button */
+      .qrBtn{
+        position: absolute;
+        top: 5px;
+         left: 0px;
+        }
+        .qrBtn img{
+          width: 25px;
+          opacity: .7;
+          transition: 0.2s ease-in-out;
+        }
+        .qrBtn:hover img{
+        opacity: 1;
+        width: 29px;
+      }
+      .appear{
+        animation: visibleQr 1s ease-in-out infinite alternate;
+      }
+      .disappear{
+        animation: invisible 1s ease-in-out infinite alternate;
+      }
+      /* avatar modal */
+      .avatar-img{
+        width: 80px;
+        transform: .3s ease-in-out;
+      }
+      .avatar-img:hover{
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+        border-radius: 50%;
+        transform: scale(1.1);
+      }
+      /* prealoader */
+      #preloader{
+        background: #fff url('./images/Hourglass.gif');
+        background-repeat: no-repeat;
+        background-position: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom:0;
+        width: 100%;
+        height: 100vh;
+        z-index: 5;
+      }
+      /* appear animation */
+      @keyframes visibleQr{
+        0%{
+          opacity: 0;
+        }
+        100%{
+          opacity: 1;
+        }
+      }
+      /* disapper animation */
+      @keyframes invisible{
+        0%{
+          opacity: 1;
+        }
+        100%{
+          opacity: 0;
+        }
+      }
+      /* formsection index page */
+      /* login section */
+      #LoginBox h4{
+        font-size: 2.5rem;
+        text-align: center;
+      }
+      #LoginBox label{
+        font-size: 1rem;
+        font-weight: 400;
+      }
+      #LoginBox p{
+        font-size: .9rem;
+        font-weight: 400;
+      }
+      #LoginBox p>span{
+        font-size: 1rem;
+      }
+      /* Login Box animation */
+      #LoginBox{
+        transform: translateX(0%);
+        transition: .3s cubic-bezier(.62,0,.39,.99);
+      }
+      .inAnimationLogin{
+        transform: translateX(0%) !important;
+      }
+      .outAnimationLogin{
+        transform: translateX(-100%) !important;
+      }
+      .switchBtn{
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      .switchBtn:hover{
+        color: #729cfe !important;
+      }
+      
+      
+      /* Registration box animation */
+      #RegisterBox{
+        transform: translateX(0%);
+        transition: .3s cubic-bezier(.62,0,.39,.99);
+      }
+      #RegisterBox h4{
+        font-size: 2.5rem;
+        text-align: center;
+      }
+      .inAnimationRegistration{
+        transform: translateX(-100%) !important;
+      }
+      .outAnimationRegistration{
+        transform: translateX(0%) !important;
+      }
+
+      /* slide animation */
+      @keyframes slide{
+        0%{
+          /* transform: translateX(-100%); */
+          scale:1;   
+        }
+        40%{
+          scale: 1.65;
+        }
+        100%{
+          /* transform: translateX(0%); */
+          scale:1;;
+        }
+      }
+
+      /* index page body section */
+      .bodySec{
+        background: #fdfdfd;
+      }
+      .form-sec{
+        background: #fff;
+      }
+
+      @media only screen and (max-width: 600px) {
+        .active i{
+          display: none;
+        }
+        #incomeType,#income{
+          width: 100%;
+        }
+        .income_input_container{
+          flex-direction: column;
+        }
+        .incomeAddBox{
+            border: 1px solid #8888886d !important;
+            box-shadow: rgba(50, 50, 93, 0.15) 0px 6px 12px -2px, rgba(0, 0, 0, 0.2) 0px 3px 7px -3px !important;
+          }
+          .expense_box button{
+            width: 100%;
+          }
+          .bodySec{
+            background: #fbfbfb;
+          }
+          .form-sec,.titlesec{
+            border: none !important;
+          }
+          .form-sec{
+            background: transparent;
+          }
+          .qrBtn{
+            top: -35px;
+             left: -15px;
+            }
+            /* scroll btn */
+            #upBtn{
+              background: rgba(1, 200, 170, 0.796);
+              color: #fff;
+              right:25px;
+              bottom: 25px;
+              
+            }
+            #upBtn:hover{
+              background: rgb(1, 200, 170);
+              color: #fff;
+            }
+            
+          }
+          @media only screen and (min-width:600px ) and (max-width: 1200px) {
+          .qrBtn{
+            top: 10px;
+             right: -90%;
+            }
+
+          }

@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>WiseWallet || Budget Wisely</title>
+    <link rel="shortcut icon" href="./images/FavIcon.png" type="image/x-icon">
+
 <!-- Font Awesome -->
 <link
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -19,32 +21,57 @@
   href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.css"
   rel="stylesheet"
 />
+<link rel="stylesheet" href="./style.css">
 </head>
-<body style="background-color: rgb(135, 171, 255);">
-    <div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
-        <form class="py-4 px-5  bg-light" style="width: 40%;border-radius: 10px;">
-            <h1 class="text-center my-4">Login</h1>
-            <!-- Email input -->
-            <div class="form-outline mb-4">
-              <input type="text" id="userName" class="form-control" />
-              <label class="form-label" for="form2Example1">User Name</label>
-            </div>
-          
-            <!-- Password input -->
-            <div class="form-outline mb-4">
-              <input type="password" id="pass" class="form-control" />
-              <label class="form-label" for="form2Example2">Password</label>
-            </div>
-          
-            <!-- 2 column grid layout for inline styling -->
-            
-          
-            <!-- Submit button -->
-            <button type="button" class="btn btn-primary btn-block mb-4" onclick="login()">Sign in</button>
-          
-            <!-- Register buttons -->
-          </form>
+<body class="bodySec">
+  
+<div class="container py-lg-5 py-1">
+  <div class="row mt-lg-5 mt-4">
+
+    <div class="titlesec col-lg-6 col-12 bg-light p-lg-5 p-1 my-lg-4 my-2 border position-relative">
+      <div class="container ms-lg-5 ms-1">
+        <h2 class="title">Wise<span>W</span>allet</h2>
+        <p class="text-muted ms-1">
+          Budget Today for a Wealthy Tomorrow.
+        </p>
+        <button class="btn shadow-0 qrBtn" onclick="changeImage()">
+        <img src="./images/qr-codeBtn.png" alt="qrimage"  width="29px"></button>
+        <img id="image-qr" class=" d-grid mx-5" src="./images/Investment data-cuate.svg" alt="qr">
+      </div>
     </div>
+
+    <!-- form section -->
+    <div class="form-sec col-lg-6 col-12 border my-lg-4 my-2 overflow-hidden">
+
+      <div class="d-flex" style="width: 200%">
+        <!-- login -->
+        <div id="LoginBox" class="container p-4 p-lg-5">
+          <h4 class="mb-4">Login</h4>
+          <label for="lname" class="text-muted mx-1">UserName:</label> <span id="error-message-lname" class="text-danger mx-2"></span>
+          <input type="text" id="lname" class="form-control mt-2 mb-3 p-2">
+          <label for="lpass" class="text-muted mx-1">Password:</label> <span id="error-message-lpass" class="text-danger mx-2"></span>
+          <input type="password" id="lpass" class="form-control mt-2 mb-2  p-2">
+          <p class="text-muted text-center">Create an account:<span class="mx-2 text-primary switchBtn" onclick="RegisterSwitchBtn()" >Register</span></p>
+          <div class="text-center mt-3 mt-lg-2 ">  <button class="btn btn-success" onclick="Login()">Login</button>  </div>
+        </div>
+        <!-- Register -->
+        <div id="RegisterBox" class="container p-4 p-lg-5">
+          <h4 class="mb-4 text-center">Register</h4>
+          <label for="rname" class="text-muted">UserName:</label> <span id="error-message-rname" class="text-danger mx-2"></span>
+          <input type="text" id="rname" class="form-control my-2 p-2">
+          <label for="remail" class="text-muted">Email id:</label> <span id="error-message-remail" class="text-danger mx-2"></span>
+          <input type="mail" id="remail" class="form-control my-2 p-2">
+          <label for="rpass" class="text-muted">Password:</label> <span id="error-message-rpass" class="text-danger mx-2"></span>
+          <input type="password" id="rpass" class="form-control mt-2 mb-2  p-2">
+          <p class="text-muted text-center">already have an account:<span class="mx-2 text-primary switchBtn" onclick="LoginSwitchBtn()">Login</span></p>
+          <div class="text-center mt-2">  <button class="btn btn-success" onclick="Register()">Register</button>  </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 
 
 <!-- MDB -->
@@ -52,23 +79,6 @@
   type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"
 ></script>
-<script>
-    function login(){
-    uname = userName.value;
-    if(uname == ''){
-        alert('enter username')
-    }
-    else{
-        if(pass.value == ''){
-            alert('enter password');
-        }
-        else{
-            alert('Login Successful');
-            localStorage.setItem('User',uname);
-            window.location = './home.html';
-        }
-    }
-}
-</script>
+<script src="./script.js"></script>
 </body>
 </html>

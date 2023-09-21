@@ -1,126 +1,142 @@
-var income = document.getElementById('income')
-var expenseAmount = document.getElementById('expenseAmount')
-var expenseType = document.getElementById('expenseType')
-var balanceAmt = document.getElementById('balanceAmt');
-var spendAmt = document.getElementById('spendAmt')
-var incomeType =document.getElementById('incomeType')
+var LoginBox = document.getElementById("LoginBox");
+var RegisterBox = document.getElementById("RegisterBox");
+var lname = document.getElementById("lname");
+var lpass = document.getElementById("lpass");
+var rname = document.getElementById("rname");
+var rpass = document.getElementById("rpass");
+var remail = document.getElementById("remail");
+var errorLname = document.getElementById("error-message-lname");
+var errorLpass = document.getElementById("error-message-lpass");
+var errorRname = document.getElementById("error-message-rname");
+var errorRpass = document.getElementById("error-message-rpass");
+var errorRemail = document.getElementById("error-message-remail");
+var imageQr = document.getElementById("image-qr");
 
-balance = JSON.parse(localStorage.getItem('income'))
 
-function submitIncome(){
-    amt = income.value
-    amtType = incomeType.value
-    let addMoney ={
-        amt,
-        amtType
-    } 
-    amtArr =[];
-    if(amt !== '' && amtType !== ''){
-        
-        Temp = JSON.parse(localStorage.getItem('income'))
-        if(Temp !== null){
-            Temp.forEach(a=>amtArr.push(a))
+function RegisterSwitchBtn(){
+    LoginBox.classList.add('outAnimationLogin');
+    RegisterBox.classList.add('inAnimationRegistration');
+    RegisterBox.classList.remove('outAnimationRegistration');
+}
+
+function LoginSwitchBtn(){
+    LoginBox.classList.remove('outAnimationLogin');
+    RegisterBox.classList.add('outAnimationRegistration');
+    LoginBox.classList.add('inAnimationLogin');
+}
+// image change function
+function changeImage(){
+    imageQr.classList.toggle('QrAdded');
+    if(imageQr.classList.contains('QrAdded')){
+        imageQr.src ='./images/Qr.png'
+    }
+    else{
+        imageQr.src ='./images/Investment data-cuate.svg'
+    }
+}
+
+// Register function
+function Register(){
+    if(rname.value == "" && remail.value =='' && rpass.value == ''){
+        errorRname.innerHTML="*Please enter a name";
+        errorRemail.innerHTML = "*Please enter a email address";    
+        errorRpass.innerHTML = "*Please enter a password";
+    }
+    else if(rname.value == "" && remail.value =='' ){
+        errorRpass.innerHTML = "";
+        errorRname.innerHTML="*Please enter a name";
+        errorRemail.innerHTML = "*Please enter a email address";    
+    }
+    else if(rpass.value == "" && remail.value == ""){
+        errorRname.innerHTML="";
+        errorRpass.innerHTML = "*Please enter a password";
+        errorRemail.innerHTML = "*Please enter a email address";
+    }
+    else if(rpass.value == "" && rname.value == ''){
+        errorRemail.innerHTML = "";
+        errorRname.innerHTML="*Please enter a name";
+        errorRemail.innerHTML = "*Please enter a email address";
+    }
+    else if(rname.value == ""){
+        errorRpass.innerHTML = "";
+        errorRemail.innerHTML = "";    
+        errorRname.innerHTML="*Please enter a name";
+    }
+    else if(rpass.value == ""){
+        errorRname.innerHTML="";
+        errorRemail.innerHTML = "";
+        errorRpass.innerHTML = "*Please enter a password";
+    }
+    else if(remail.value == ''){
+        errorRname.innerHTML="";
+        errorRpass.innerHTML = "";
+        errorRemail.innerHTML = "*Please enter a email address";
+    }
+    else{
+        checkRegistration(rname.value, rpass.value,remail.value);
+    }
+}
+// LoginSwitchBtn();
+
+function checkRegistration(uname,password,email){
+    uname = uname.toLowerCase();
+    if(JSON.parse(localStorage.getItem(uname))){
+        errorRname.innerHTML = "*User name already exists!";
+    }
+    else if(password.lenght <= 6 && password.lenght >= 10){
+        errorRpass.innerHTML = "*Please enter a password between 6 and 10 characters";
+    }
+    else if(ValidateEmail(email) == false){
+        errorRemail.innerHTML = "*Please enter a valid email address";
+    }
+    else{
+        let udetails ={
+            uname,
+            password,
+            email
         }
-        amtArr.push(addMoney);
-        localStorage.setItem('income',JSON.stringify(amtArr));
-        alert('Income added successfully')
-        location.reload();
-        
-        // console.log(addMoney);
-        // localStorage.setItem('income',JSON.stringify(addMoney))
-    // console.log(income.value);
-    // localStorage.setItem('income',income.value)
+        alert('Registration Successfull');
+        localStorage.setItem(uname,JSON.stringify(udetails));
+        LoginSwitchBtn();
+    }
+}
+
+// login function
+function Login(){
+    Inputname =  JSON.parse(localStorage.getItem(lname.value.toLowerCase()));
+    if(lname.value == ''  && lpass.value == ''){
+        errorLname.innerHTML = "*Please enter a User name"; 
+        errorLpass.innerHTML = "*Please enter a password";
+    }
+    else if(lname.value == ''){
+        errorLname.innerHTML = "*Please enter  a User name";
+        errorLpass.innerHTML = "";
+    }
+    else if(lpass.value == ''){
+        errorLname.innerHTML = "";
+        errorLpass.innerHTML = "*Please enter a password";
+    }
+    else if(Inputname == '' || Inputname == null){
+        errorLname.innerHTML = "*User name does not exist!";
+        errorLpass.innerHTML = "";
+    }
+    else if(Inputname.password != lpass.value){
+        errorLname.innerHTML = "";
+        errorLpass.innerHTML = "*Wrong password!";
     }
     else{
-        alert('Enter amount!!')
+        alert('Login Successfull');
+        localStorage.setItem('unameKey',JSON.stringify(Inputname.uname));
+        window.location = './home.html';
     }
 }
-if(balance === null ){
-    balanceAmt.innerHTML = 0;
-}
-else{
-    sum=0;
-    balance.forEach(a=>sum+=Number(a.amt))
-    balanceAmt.innerHTML = sum;
-}
-spendAmt.innerText = 0;
 
-
-function submitExpense(){
-    e=expenseAmount.value;
-    t=expenseType.value
-    let expense={
-        e,
-        t
+// email validation
+function ValidateEmail(input) {
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/; 
+    if (input.match(validRegex)) {
+      return true;
+    } else {
+      return false;
     }
-    exps = [];
-    if(e !== '' && t !== ''){
-        Expns = JSON.parse(localStorage.getItem('expns'))
-        if(Expns !== null){
-        Expns.forEach(a=>exps.push(a))
-    }
-    exps.push(expense);
-    localStorage.setItem('expns',JSON.stringify(exps))
-    alert(`submitted`)
-    location.reload();
-}
-else{
-    alert('Enter amount!!')
-}
-    // localStorage.setItem('Expense',JSON.stringify(expense));
-}
-exp = JSON.parse(localStorage.getItem('expns'));
-if(exp !== null){
-    let spent = 0;
-    exp.forEach(a=> {
-        spent += Number(a.e);
-    });
-    balanceAmt.innerText -= spent;
-    spendAmt.innerText = Number(spent);   
-}
-
-function logout(){
-    localStorage.clear();
-    window.location='./index.html'
-}
-
-
-if(balance !== null){
-    total=0;
-    balance.forEach(a=> {
-        IncomeTable.innerHTML += `
-                    <tr>
-                    <td >${a.amtType}</td>
-                      <td >${a.amt}</td>
-                      <td >${total+=Number(a.amt)}</td>
-                    </tr>
-        `
-    }); 
-}
-
-if(exp !== null){
-    tempSum=sum;
-    exp.forEach(a=> {
-        tempSum-=a.e;
-        ExpenseTable.innerHTML += `
-                    <tr>
-                    <td >${a.t}</td>
-                      <td >${a.e}</td>
-                      <td >${tempSum}</td>
-                    </tr>
-        `
-    }); 
-}
-var table_box1 = document.getElementById('table_box1');
-var table_box2 = document.getElementById('table_box2')
-
-function viewMore(){
-    table_box1.classList.toggle('d-none')
-    table_box2.classList.toggle('d-none')
-    if(table_box1.classList.contains('d-none')){
-        viewmore.innerText = 'View More';
-    }
-    else{
-        viewmore.innerText = 'View Less';
-    }
-}
+  }
